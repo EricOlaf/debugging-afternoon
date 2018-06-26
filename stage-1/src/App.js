@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import './App.css';
-import NavBar from './components/NavBar/NavBar';
-import Home from './components/Home/Home';
-import ShoppingCart from './components/ShoppingCart/ShoppingCart';
-import StoreFront from './components/StoreFront/StoreFront';
-import { Route, Switch } from 'react-router-dom';
-
+import React, { Component } from "react";
+import "./App.css";
+import NavBar from "./components/NavBar/NavBar";
+import Home from "./components/Home/Home";
+import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
+import StoreFront from "./components/StoreFront/StoreFront";
+import { Route, Switch } from "react-router-dom";
 
 class App extends Component {
   constructor() {
@@ -13,7 +12,7 @@ class App extends Component {
 
     this.state = {
       shoppingCart: []
-    }
+    };
 
     this.addToShoppingCart = this.addToShoppingCart.bind(this);
     this.removeFromShoppingCart = this.removeFromShoppingCart.bind(this);
@@ -22,7 +21,7 @@ class App extends Component {
   addToShoppingCart(product) {
     this.setState({
       shoppingCart: [...this.state.shoppingCart, product]
-    })
+    });
     console.log(this.state.shoppingCart);
   }
 
@@ -31,7 +30,7 @@ class App extends Component {
     newShoppingCart.splice(newShoppingCart.indexOf(product), 1);
     this.setState({
       shoppingCart: newShoppingCart
-    })
+    });
     console.log(this.state.shoppingCart);
   }
 
@@ -41,15 +40,23 @@ class App extends Component {
         <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/storefront" render={() => {
-            return <StoreFront
-              addToShoppingCart={this.addToShoppingCart} />
-          }} />
-          <Route path="/shoppingcart" render={() => {
-            return <ShoppingCart
-              shoppingCart={this.state.shoppingCart}
-              removeFromShoppingCart={this.removeFromShoppingCart} />
-          }} />
+          <Route
+            path="/storefront"
+            render={() => {
+              return <StoreFront addToShoppingCart={this.addToShoppingCart} />;
+            }}
+          />
+          <Route
+            path="/shoppingcart"
+            render={() => {
+              return (
+                <ShoppingCart
+                  shoppingCart={this.state.shoppingCart}
+                  removeFromShoppingCart={this.removeFromShoppingCart}
+                />
+              );
+            }}
+          />
         </Switch>
       </div>
     );
